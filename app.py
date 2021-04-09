@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import json
 from data_model import DB, User, Tweet
+from twitter import upsert_user
 
 
 def create_app():
@@ -21,12 +22,11 @@ def create_app():
             args = json.load(f)
         return render_template('base.html', **args)
 
-    @app.route('/products')
-    def products():
-        new_tweet = Tweet(id=1, text='tweet', user_id=1)
-        DB.session.add(new_tweet)
-        DB.session.commit()
-        return render_template('base.html', title="Products", body="products in the body")
+    @app.route('/add_user', methods=['GET'])
+    def add_user():
+        twitter_handle = request.args['twitter_handle']
+        upsert_user(twitter_handle)
+        return 'insert successful'
 
     return app
 
