@@ -1,6 +1,6 @@
 import tweepy
 import os
-from data_model import DB, User, Tweet
+from .data_model import DB, User, Tweet
 # python-dotenv
 from dotenv import load_dotenv
 
