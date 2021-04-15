@@ -20,7 +20,7 @@ def create_app():
             # DB.session.commit()
             # pass
         with open(
-                '/lambda3.3.1-1/lambda3311/templates/landing.json') as f:
+                'lambda3311/templates/landing.json') as f:
             args = json.load(f)
         return render_template('base.html', **args)
 
