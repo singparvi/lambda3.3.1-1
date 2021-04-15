@@ -7,7 +7,6 @@ from ml import predict_most_likely_author
 
 
 def create_app():
-
     app = Flask(__name__)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
@@ -16,11 +15,12 @@ def create_app():
     @app.route('/')
     def landing():
         if not path.exists(app.config['SQLALCHEMY_DATABASE_URI']):
-            #DB.drop_all()
-            #DB.create_all()
-            #DB.session.commit()
-            pass
-        with open('templates/landing.json') as f:
+            # DB.drop_all()
+            DB.create_all()
+            # DB.session.commit()
+            # pass
+        with open(
+                '/Users/rob/G_Drive_sing.parvi/Lambda3.3.1-1/lambda3.3.1-1/lambda3.3.1-1/templates/landing.json') as f:
             args = json.load(f)
         return render_template('base.html', **args)
 
@@ -29,7 +29,6 @@ def create_app():
         twitter_handle = request.args['twitter_handle']
         upsert_user(twitter_handle)
         return 'insert successful'
-
 
     @app.route('/predict_author', methods=['GET'])
     def predict_author():

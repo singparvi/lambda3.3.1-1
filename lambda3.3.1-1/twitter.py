@@ -1,9 +1,15 @@
 import tweepy
 import os
 from data_model import DB, User, Tweet
+# python-dotenv
+from dotenv import load_dotenv
 
-twitter_api_key = os.environ['TWITTER_API_KEY']
-twitter_api_secret = os.environ['TWITTER_API_KEY_SECRET']
+load_dotenv()
+# MY_PASSWORD = os.getenv('MY_PASSWORD')
+
+
+twitter_api_key = os.getenv('TWITTER_API_KEY')
+twitter_api_secret = os.getenv('TWITTER_API_KEY_SECRET')
 twitter_auth = tweepy.OAuthHandler(twitter_api_key, twitter_api_secret)
 twitter_api = tweepy.API(twitter_auth)
 
